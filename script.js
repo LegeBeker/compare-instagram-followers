@@ -5,6 +5,19 @@ let following = [];
 let followList = null;
 
 (async function () {
+    if (document.querySelector(".overlay")) {
+        window.location.reload();
+    }
+
+    var buttons = document.querySelectorAll("button");
+
+    for (var i = 0; i < buttons.length; i++) {
+        if (buttons[i].firstChild.innerHTML === "Log in") {
+            alert("Please log in to Instagram.");
+            return;
+        }
+    }
+
     document.documentElement.style.setProperty('--ig-link', 'darkblue');
 
     var overlay = document.createElement("div");
