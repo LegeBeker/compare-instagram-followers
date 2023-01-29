@@ -1,5 +1,5 @@
-let TrueFollowersCount = 0;
-let TrueFollowingCount = 0;
+let followersCount = 0;
+let followingCount = 0;
 let followers = [];
 let following = [];
 let followList = null;
@@ -93,7 +93,7 @@ async function runScript() {
 
     document.querySelector(".progressDiv").remove();
 
-    if (TrueFollowersCount !== followers.length || TrueFollowingCount !== following.length) {
+    if (followersCount !== followers.length || followingCount !== following.length) {
         var warning = document.createElement("div");
         warning.style.color = "red";
         warning.style.fontSize = "1.5em";
@@ -156,13 +156,13 @@ async function getCounts() {
     return new Promise((resolve) => {
         document.querySelector(".progressDiv").innerHTML += "Getting followers count<br>";
         console.log("Getting followers count");
-        var followersCount = document.querySelector("a[href*='/followers/'] span span").innerHTML;
+        followersCount = document.querySelector("a[href*='/followers/'] span span").innerHTML;
         followersCount = followersCount.replace(/,/g, "");
         followersCount = parseInt(followersCount);
 
         document.querySelector(".progressDiv").innerHTML += "Getting following count<br>";
         console.log("Getting following count");
-        var followingCount = document.querySelector("a[href*='/following/'] span span").innerHTML;
+        followingCount = document.querySelector("a[href*='/following/'] span span").innerHTML;
         followingCount = followingCount.replace(/,/g, "");
         followingCount = parseInt(followingCount);
         resolve();
