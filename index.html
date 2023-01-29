@@ -3,16 +3,87 @@
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Show differentiating instagram followers</title>
+    <title>compare instagram followers</title>
+    <style>
+        html,
+        body {
+            font-size: 1.1rem;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        mark {
+            background-color: grey;
+            color: white;
+            padding: 0.2rem;
+            border-radius: 0.2rem;
+        }
+    </style>
 </head>
 
 <body>
-    <label for="username">Username:</label>
-    <input type="text" name="username">
-    <button type="submit">Submit</button>
-    <div id="only-following"></div>
-    <div id="only-followers"></div>
-    <script src='script.js'></script>
+    <h2>Show differentiating instagram followers 0.1</h2>
+    <p>There are 2 methods:</p>
+    <h4>Using the Chrome/Edge extention (recommended)</h4>
+    <ol>
+        <li>Download the zip <a href="./chrome-extention/compare-instagram-followers.zip" download>HERE</a>.</li>
+        <li>Unzip the file and you should have a folder named <mark>compare-instagram-followers</mark>.</li>
+        <li>In Chrome/Edge go to the extensions page (chrome://extensions or edge://extensions).</li>
+        <li>Enable Developer Mode.</li>
+        <li>Drag the <mark>compare-instagram-followers</mark> folder anywhere on the page to import it (do not delete the folder afterwards).</li>
+        <li>Go to an Instagram profile.</li>
+        <li>Click on the extention icon.</li>
+    </ol>
+
+    <h4>Using the JavaScript console script</h4>
+    <ol>
+        <li>Click <button onclick="copyScript()">HERE</button> to copy the script to your clipboard.<span class="copied" style="display: none;">(If the copy does not work, press <span onclick="showScript()">here</span>)</span></li>
+        <li>Open the JavaScript console (F12 or Ctrl+Shift+I).</li>
+        <li>Paste the code (Ctrl+V) in the JavaScript console and press enter.</li>
+    </ol>
+
+    <p>For any questions or suggestions, create an issue at <a href="https://github.com/LegeBeker/compare-instagram-followers">github.com/LegeBeker/compare-instagram-followers</a>.</p>
+
+    <!-- div for showing script -->
+    <div id="script"></div>
+
+    <script>
+        function copyScript() {
+            loadScript().then((value) => {
+                var textArea = document.createElement("textarea");
+                textArea.value = value;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                console.log('Script copied to clipboard');
+            });
+            document.querySelector('.copied').style.display = 'inline';
+        }
+
+        function showScript() {
+            loadScript().then((value) => {
+                console.log(value);
+                document.querySelector('#script').innerHTML = value.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                document.querySelector('#script').style.whiteSpace = 'pre';
+            });
+        }
+
+        async function loadScript() {
+            if (await fileExists('./script.js')) {
+                var value = await (await fetch('./script.js')).text();
+            } else {
+                console.log('File not found');
+            }
+            return value;
+        }
+
+        async function fileExists(url) {
+            var response = await fetch(url);
+            return response.status == 200;
+        }
+    </script>
+
 </body>
 
 </html>
