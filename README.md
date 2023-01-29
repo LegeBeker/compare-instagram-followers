@@ -1,5 +1,5 @@
 # compare instagram followers
-See who only follows you and vice versa (Works only for public accounts)
+See who only follows an account and vice versa (Only works for accounts where you can see followers)
 
 ## Usages
 You can see how to use this script [here](http://github.volkanwelp.com/compare-instagram-followers/)
